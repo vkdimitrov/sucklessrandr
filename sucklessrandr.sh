@@ -1,5 +1,5 @@
 #!/bin/bash
-CONF=~/.config/sucklessrandr.conf2
+CONF=~/.config/sucklessrandr.conf
 if [ ! -f $CONF ]; then
   echo "No configuration found in $CONF please add some."
   touch $CONF
@@ -18,7 +18,7 @@ fi
 while :
 do
   outputs=`xrandr | grep " connected"|cut -d" " -f1 |  awk '{print}' ORS=''|tail -1`
-  xrandr_command=`awk "/^$outputs\|/ {print}" ~/config/.sucklessrandr|cut -d\| -f2`
+  xrandr_command=`awk "/^$outputs\|/ {print}" $CONF|cut -d\| -f2`
   $xrandr_command
   sleep 2
 done
